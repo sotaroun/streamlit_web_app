@@ -12,7 +12,7 @@ st.title('ディズニーグッズ情報')
 
 # ボタンを作成(このボタンをアプリ上で押すと"if press_button:"より下の部分が実行される)
 
-press_button = st.button("スクレイピング開始")
+press_button = st.button("seleniumテストアプリ")
 
 if press_button:
     # スクレイピングするwebサイトのURL
