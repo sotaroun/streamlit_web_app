@@ -16,7 +16,7 @@ press_button = st.button("スクレイピング開始")
 
 if press_button:
     # スクレイピングするwebサイトのURL
-    URL = "https://www.tokyodisneyresort.jp/tdl/shop.html"
+    URL = "https://ohenziblog.com"
 
     # ドライバのオプション
     options = ChromeOptions()
