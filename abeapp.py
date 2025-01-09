@@ -12,7 +12,7 @@ st.title('ディズニーグッズ情報')
 
 # ボタンを作成(このボタンをアプリ上で押すと"if press_button:"より下の部分が実行される)
 
-press_button = st.button("seleniumテストアプリ")
+press_button = st.button("スクレイピング開始")
 
 if press_button:
     # スクレイピングするwebサイトのURL
@@ -27,14 +27,14 @@ if press_button:
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    # webdriver_managerによりドライバーをインストール
-    # chromiumを使用したいのでchrome_type引数でchromiumを指定しておく
-    CHROMEDRIVER = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-    service = fs.Service(CHROMEDRIVER)
-    driver = webdriver.Chrome(
-                                options=options,
-                                service=service
-                                 )
+# webdriver_managerによりドライバーをインストール
+# chromiumを使用したいのでchrome_type引数でchromiumを指定しておく
+CHROMEDRIVER = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+service = fs.Service(CHROMEDRIVER)
+driver = webdriver.Chrome(
+                            options=options,
+                            service=service
+                            )
 # URLで指定したwebページを開く
 driver.get(URL)
 
