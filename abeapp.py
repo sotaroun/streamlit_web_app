@@ -18,7 +18,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     gu_button = st.button("グー")
-    st.image(Image.open('data/くgu.png'), width=50)
+    st.image(Image.open('data/gu.png'), width=50)
     st.write(random.randrange(10), 'pt')
     if gu_button:
         chosen_hand = random.choice(oponent_hands)
