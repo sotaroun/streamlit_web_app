@@ -6,9 +6,11 @@ from selenium.webdriver.chrome import service as fs
 from selenium.webdriver import ChromeOptions
 from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 # タイトル
-st.title('ディズニーグッズ情報')
+st.title('ィズニーグッズ情報')
 
 # ボタンを作成(このボタンをアプリ上で押すと"if press_button:"より下の部分が実行される)
 
@@ -28,37 +30,17 @@ if press_button:
     options.add_argument('--disable-dev-shm-usage')
 
     # webdriver_managerによりドライバーをインストール
-    # chromiumを使用したいのでchrome_type引数でchromiumを指定しておく
-    CHROMEDRIVER = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-    service = fs.Service(CHROMEDRIVER)
-    driver = webdriver.Chrome(
-                                options=options,
-                                service=service
-                                )
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+
     # URLで指定したwebページを開く
     driver.get(URL)
 
     # グッズタイトルを取得
-    goodsname = driver.find_element(By.CLASS_NAME, 'js-subbuzz__title-text')
+    goodsname = driver.find_element(By.CLASS_NAME, 'js-subbuzz__title-text').text
     st.caption(goodsname)
 
-    # webページ上のタイトル画像を取得
-    img = driver.find_element(By.XPATH, '//figure/div/div/picture/img')
-    src = img.get_attribute('src')
-
-    # 取得した画像をカレントディレクトリに保存
-    with open(f"tmp_img.png", "wb") as f:
-        f.write(img.screenshot_as_png)
-
-    # 保存した画像をstreamlitアプリ上に表示
-    st.image("tmp_img.png")
-
-    # webページを閉じる
-    driver.close()
-
-    # スクレイピングが完了したことをstreamlitアプリ上に表示する
-    st.write("スクレイピング完了！")
-
-    st.caption('これは安部のテストアプリです')
+    
 
 
