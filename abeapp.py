@@ -28,6 +28,8 @@ if press_button:
     options.add_argument('--disable-gpu')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
+    options.add_argument("--headless=new")  # 新しい Headless モードを利用
+
 
     # webdriver_managerによりドライバーをインストール
 
