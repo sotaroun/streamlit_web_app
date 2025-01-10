@@ -1,48 +1,44 @@
 import streamlit as st
-from selenium import webdriver
 from PIL import Image
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome import service as fs
-from selenium.webdriver import ChromeOptions
-from webdriver_manager.core.os_manager import ChromeType
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+import random
 
-# タイトル
-st.title('ィズニーグッズ情報')
+# 手と画像を辞書で定義
+oponent_hands = [
+    {"name": "グー", "image": Image.open('data/ぐー.png')},
+    {"name": "チョキ", "image": Image.open('data/ちょき.png')},
+    {"name": "パー", "image": Image.open('data/ぱー.png')}
+]
 
-# ボタンを作成(このボタンをアプリ上で押すと"if press_button:"より下の部分が実行される)
+# タイトルと説明
+st.title('じゃんけんゲーム')
+st.write('じゃんけんに勝って10ptを目指そう')
 
-press_button = st.button("スクレイピング開始")
+# カラムでボタンを配置
+col1, col2, col3 = st.columns(3)
 
-if press_button:
-    # スクレイピングするwebサイトのURL
-    URL = "https://www.buzzfeed.com/jp/bfjapan/disney-osusume-1-100"
+with col1:
+    gu_button = st.button("グー")
+    st.image(Image.open('data/ぐー.png'), width=50)
+    st.write(random.randrange(10), 'pt')
+    if gu_button:
+        chosen_hand = random.choice(oponent_hands)
+        st.write(chosen_hand["name"])
+        st.image(chosen_hand["image"], width=50)
 
-    # ドライバのオプション
-    options = ChromeOptions()
+with col2:
+    tyoki_button = st.button("チョキ")
+    st.image(Image.open('data/ちょき.png'), width=50)
+    st.write(random.randrange(10), 'pt')
+    if tyoki_button:
+        chosen_hand = random.choice(oponent_hands)
+        st.write(chosen_hand["name"])
+        st.image(chosen_hand["image"], width=50)
 
-    # option設定を追加
-    options.add_argument("--headless")
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument("--headless=new")  # 新しい Headless モードを利用
-
-
-    # webdriver_managerによりドライバーをインストール
-
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=options)
-
-    # URLで指定したwebページを開く
-    driver.get(URL)
-
-    # グッズタイトルを取得
-    goodsname = driver.find_element(By.CLASS_NAME, 'js-subbuzz__title-text').text
-    st.caption(goodsname)
-
-    
-
-
+with col3:
+    pa_button = st.button("パー")
+    st.image(Image.open('data/ぱー.png'), width=50)
+    st.write(random.randrange(10), 'pt')
+    if pa_button:
+        chosen_hand = random.choice(oponent_hands)
+        st.write(chosen_hand["name"])
+        st.image(chosen_hand["image"], width=50)
