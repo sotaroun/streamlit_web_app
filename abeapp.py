@@ -16,7 +16,7 @@ press_button = st.button("スクレイピング開始")
 
 if press_button:
     # スクレイピングするwebサイトのURL
-    URL = "https://www.tokyodisneyresort.jp/tdl/shop.html"
+    URL = "https://www.buzzfeed.com/jp/bfjapan/disney-osusume-1-100"
 
     # ドライバのオプション
     options = ChromeOptions()
@@ -38,16 +38,12 @@ if press_button:
     # URLで指定したwebページを開く
     driver.get(URL)
 
-    # webページ上の最新項目をクリック
-    newgoods = driver.find_element(By.CLASS_NAME, 'listTextArea')
-    newgoods.click()
-
     # グッズタイトルを取得
-    goodsname = driver.find_element(By.TAG_NAME, 'heading1')
+    goodsname = driver.find_element(By.CLASS_NAME, 'js-subbuzz__title-text')
     st.caption(goodsname)
 
     # webページ上のタイトル画像を取得
-    img = driver.find_element(By.XPATH, '//div[@id="page"]/div/div/div/div/div/div/div/div/div/div/div/div/div/div/img')
+    img = driver.find_element(By.XPATH, '//figure/div/div/picture/img')
     src = img.get_attribute('src')
 
     # 取得した画像をカレントディレクトリに保存
